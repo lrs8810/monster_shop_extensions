@@ -1,0 +1,19 @@
+
+<%= form_tag path, method: method do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name, name %>
+
+  <%= label_tag :description %>
+  <%= text_field_tag :description, description %>
+
+  <%= label_tag :price %>
+  <%= text_field_tag :price, price %>
+
+  <%= label_tag :image %>
+  <%= text_field_tag :image, image %>
+
+  <%= label_tag :inventory %>
+  <%= text_field_tag :inventory, inventory %>
+
+  <%= submit_tag button_label %>
+<% end %>

@@ -1,0 +1,13 @@
+<%= form_tag admin_update_user_profile_path(@user.id), method: :patch do %>
+  <%=
+    render partial: 'partials/user_form_template', locals: {
+      name: @user.name,
+      address: @user.address,
+      city: @user.city,
+      state: @user.state,
+      zip: @user.zip,
+      email: @user.email
+    }
+  %>
+  <p><%= submit_tag "Update Profile" %></p>
+<% end %>

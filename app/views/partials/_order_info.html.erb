@@ -1,0 +1,17 @@
+<p>Date Created: <%= created_at %></p>
+<p>Last Updated: <%= updated_at %></p>
+<p>Status: <%= status %></p>
+<% if item_orders %>
+  <% item_orders.each do |item_order| %>
+    <article id='item-order-<%= item_order.id %>'>
+      <p>Name: <%= item_order.item.name %></p>
+      <p>Description: <%= item_order.item.description %></p>
+      <img src= <%= item_order.item.image %> style="width:150px">
+      <p>Quantity: <%= item_order.quantity %></p>
+      <p>Price: <%= number_to_currency(item_order.price) %></p>
+      <p>Subtotal: <%= number_to_currency(item_order.subtotal) %></p>
+    </article>
+  <% end %>
+<% end %>
+<p>Total Quantity: <%= total_quantity %></p>
+<p>Grand Total: <%= number_to_currency(grand_total) %></p>

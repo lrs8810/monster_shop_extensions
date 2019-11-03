@@ -1,0 +1,17 @@
+<h1>Order ID: <%= @order.id %></h1>
+<article id='order-info'>
+  <%= render partial: 'partials/order_info',
+    locals: {
+      id: @order.id,
+      created_at: @order.created_at,
+      updated_at: @order.updated_at,
+      status: @order.status,
+      item_orders: @order.item_orders,
+      total_quantity: @order.total_quantity,
+      grand_total: @order.grand_total
+    }
+  %>
+<% if @order.status == 'Pending' %>
+  <p><%= link_to 'Cancel Order', admin_user_order_update_path(@order.user.id, @order.id), method: :patch %>
+<% end %>
+</article>

@@ -1,0 +1,16 @@
+<h1>Update Item</h1>
+
+<center>
+  <%= render partial: 'partials/item_form',
+    locals: {
+      path: merchant_items_update_path(@item),
+      method: :patch,
+      name: @item.name,
+      description: @item.description,
+      price: @item.price,
+      image: @item.image,
+      inventory: @item.inventory,
+      button_label: 'Update Item'
+    }
+  %>
+<center>

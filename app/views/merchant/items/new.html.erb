@@ -1,0 +1,16 @@
+<h1>New Item</h1>
+
+<center>
+  <%= render partial: 'partials/item_form',
+    locals: {
+      path: merchant_user_items_path,
+      method: :post,
+      name: nil,
+      description: nil,
+      price: nil,
+      image: nil,
+      inventory: nil,
+      button_label: 'Create Item'
+    }
+  %>
+<center>

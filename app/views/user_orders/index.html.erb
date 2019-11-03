@@ -1,0 +1,18 @@
+<h1>My Orders</h1>
+<% current_user.orders.each do |order| %>
+  <article id='order-<%= order.id %>'>
+  <p>ID: <%= link_to "#{order.id}", profile_order_path(order) %></p>
+    <%= render partial: 'partials/order_info',
+      locals: {
+        id: order.id,
+        created_at: order.created_at,
+        updated_at: order.updated_at,
+        status: order.status,
+        item_orders: nil,
+        total_quantity: order.total_quantity,
+        grand_total: order.grand_total
+      }
+    %>
+  </article>
+  <hr>
+<% end %>

@@ -1,0 +1,21 @@
+<section id='user-info'>
+  <%=
+    render partial: 'partials/user_info', locals: {
+      name: @user.name,
+      address: @user.address,
+      city: @user.city,
+      state: @user.state,
+      zip: @user.zip,
+      email: @user.email
+    }
+  %>
+  <p><%= link_to 'Edit Profile', "/admin/users/#{@user.id}/edit" %></p>
+</section>
+<br>
+
+<section id='user-order-links'>
+  <h3> <%= @user.name %>'s Orders</h3>
+  <% @user.orders.each do |order| %>
+    <p>Order ID: <%= link_to "#{order.id}", admin_user_order_path(@user.id, order.id)%></p>
+  <% end %>
+</section>

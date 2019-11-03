@@ -1,0 +1,10 @@
+<%= form_tag users_path do %>
+  <p>Name: <%= text_field_tag :name, @user.name %></p>
+  <p>Address: <%= text_field_tag :address, @user.address %></p>
+  <p>City: <%= text_field_tag :city, @user.city %></p>
+  <p>State: <%= text_field_tag :state, @user.state %></p>
+  <p>Zip: <%= text_field_tag :zip, @user.zip %></p>
+  <p>Email: <%= text_field_tag :email %></p>
+  <%= render partial: 'partials/user_password_template' %>
+  <p><%= submit_tag "Create User" %></p>
+<%end %>

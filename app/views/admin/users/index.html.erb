@@ -1,0 +1,15 @@
+<h1>All Users</h1>
+
+<% @users.each do |user| %>
+  <article id='user-<%= user.id %>'>
+    <p><%= link_to user.name, "/admin/users/#{user.id}" %></p>
+    <p><%= "Date Registered: #{user.created_at}" %></p>
+    <p><%= "Role: #{user.role}" %></p>
+    <% if user.enabled? %>
+      <p><%= link_to 'Disable', "/admin/users/#{user.id}", method: :patch %></p>
+    <% else %>
+      <p><%= link_to 'Enable', "/admin/users/#{user.id}", method: :patch %></p>
+    <% end %>
+  </article>
+  <br>
+<% end %>

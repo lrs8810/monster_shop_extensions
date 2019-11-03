@@ -1,0 +1,27 @@
+<h1>All My Items</h1>
+
+<% if merchant_admin? %>
+  <h3 align = "center"><%= link_to 'Add New Item', merchant_items_new_path %></h3>
+<% end %>
+<section class="grid-container">
+  <% @items.each do |item| %>
+    <% if item.enabled? %>
+      <section class = "grid-item" id= "item-<%= item.id %>">
+        <%= item.name %>
+          <% if item.active? %>
+            <p>Active</p>
+            <%= link_to 'Deactivate Item', "/merchant/items/#{item.id}/activate_deactivate/deactivate", method: :patch %>
+          <% else %>
+            <p>Inactive</p>
+            <%= link_to 'Activate Item', "/merchant/items/#{item.id}/activate_deactivate/activate", method: :patch %>
+          <% end %><br>
+          <% if merchant_admin? %>
+            <%= link_to 'Edit', merchant_items_edit_path(item.id) %><br>
+            <% if item.no_orders? %>
+              <%= link_to 'Delete Item', merchant_item_disable_path(item.id), method: :patch %>
+            <% end  %>
+          <% end %>
+      </section>
+    <% end %>
+  <% end %>
+</section>

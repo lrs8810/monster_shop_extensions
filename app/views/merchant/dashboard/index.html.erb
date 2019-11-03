@@ -1,0 +1,20 @@
+<section id="merchant_details">
+  <h1><%= @merchant.name %></h1>
+  <h3>Merchant Information: </h3>
+  <p><%= @merchant.address %></p>
+  <p><%= "#{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
+</section><br>
+
+<h3>Current Items for Sale: <%= link_to 'View Items', merchant_user_items_path %></h3><br>
+
+<h3>Orders:</h3>
+<% @merchant.specific_orders.each do |itemorder| %>
+  <section id="order-<%=itemorder.order_id%>">
+    <p>Order #<%= link_to("#{itemorder.order_id}", merchant_orders_path(itemorder.order_id)) %></p>
+    <p>Date Created: <%= itemorder.order.created_at %></p>
+    <p>Status: <%= itemorder.order.status %></p>
+    <p>Total Quantity: <%= itemorder.order_total_quantity %> </p>
+    <p>Grand Total: <%= number_to_currency(itemorder.order_total_cost) %> </p>
+    <hr>
+  </section>
+<% end %>

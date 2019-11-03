@@ -1,0 +1,20 @@
+<section id='user-info'>
+  <%=
+    render partial: 'partials/user_info', locals: {
+      name: current_user.name,
+      address: current_user.address,
+      city: current_user.city,
+      state: current_user.state,
+      zip: current_user.zip,
+      email: current_user.email
+    }
+  %>
+  <p><%= link_to 'Edit Profile', profile_edit_path %></p>
+  <p><%= link_to 'Edit Password', profile_edit_password_path %></p>
+</section>
+
+<% if !site_admin? %>
+  <section id='user-orders'>
+    <p><%= link_to 'My Orders', profile_orders_path %></p>
+  </section>
+<% end %>

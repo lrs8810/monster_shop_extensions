@@ -1,0 +1,14 @@
+<h1>All Orders</h1>
+
+<% @orders.each do |order| %>
+  <article id='order-<%= order.id %>'>
+    <p><%= link_to "#{order.user.name}", "/admin/users/#{order.user.id}" %></p>
+    <p>Order ID: <%= link_to "#{order.id}", admin_user_order_path(order.user.id, order.id) %></p>
+    <p><%= "Order Status: #{order.status}"%></p>
+    <p><%= order.created_at %></p>
+    <% if order.packaged? %>
+      <a href="#" class="button"><%= button_to 'Ship', "/admin/orders/#{order.id}", method: :patch %></a>
+    <% end %>
+    <hr>
+  </article>
+<% end %>
