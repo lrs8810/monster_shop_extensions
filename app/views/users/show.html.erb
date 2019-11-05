@@ -8,17 +8,20 @@
   <p><%= link_to 'Edit Profile', profile_edit_path %></p>
   <p><%= link_to 'Edit Password', profile_edit_password_path %></p>
   <hr>
-  <section id='addresses'>
-    <h4>Your Addresses: </h4>
+    <h4>My Addresses: </h4>
+    <p><%= link_to 'New Address', profile_new_address_path  %></p><br>
+    <section class="grid-container" id= "addresses">
       <% current_user.addresses.each do |address| %>
+      <section class = "grid-item" id= "address-<%= address.id %>">
         <p><%= address.nickname %></p>
         <p> <%= address.address %></p>
         <p> <%= "#{address.city}, #{address.state} #{address.zip}" %></p>
+        <p><%= link_to 'Edit Address' %> | <%= link_to 'Delete Address'  %></p>
+      </section>
       <% end %>
   </section>
-  <hr>
 </section>
-
+<hr>
 <% if !site_admin? %>
   <section id='user-orders'>
     <p><%= link_to 'My Orders', profile_orders_path %></p>
