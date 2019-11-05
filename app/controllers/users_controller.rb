@@ -53,10 +53,10 @@ class UsersController < ApplicationController
   end
 
   def update_profile_params
-    params.permit(:name, :address, :city, :state, :zip, :email)
+    params.require(:user).permit(:name, :email)
   end
 
   def update_password_params
-    params.permit(:password, :password_confirmation)
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end
