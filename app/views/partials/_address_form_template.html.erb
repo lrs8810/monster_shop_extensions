@@ -1,0 +1,6 @@
+<%= f.fields_for :addresses do |addresses_form| %>
+  <p>Street Address: <%= addresses_form.text_field :address, id: 'address'%></p>
+  <p>City: <%= addresses_form.text_field :city, id: 'city' %></p>
+  <p>State: <%= addresses_form.text_field :state, id: 'state' %></p>
+  <p>Zip: <%= addresses_form.text_field :zip, id: 'zip' %></p>
+<% end  %>

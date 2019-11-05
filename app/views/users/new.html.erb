@@ -1,12 +1,6 @@
 <%= form_for @user do |f| %>
-  <p>Name: <%= f.text_field :name, id: 'name' %></p>
-  <%= f.fields_for :addresses do |addresses_form| %>
-    <p>Address: <%= addresses_form.text_field :address, id: 'address'%></p>
-    <p>City: <%= addresses_form.text_field :city, id: 'city' %></p>
-    <p>State: <%= addresses_form.text_field :state, id: 'state' %></p>
-    <p>Zip: <%= addresses_form.text_field :zip, id: 'zip' %></p>
-  <% end  %>
-  <p>Email: <%= f.email_field :email, id: 'email', value: nil %></p>
+  <%= render partial: 'partials/user_form_template', locals: {f: f, value: nil} %>
+  <%= render partial: 'partials/address_form_template', locals: {f: f} %>
   <%= render partial: 'partials/user_password_template', locals: {f: f} %>
   <p><%= f.submit %></p>
 <%end %>
