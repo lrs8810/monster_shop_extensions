@@ -29,6 +29,11 @@ Rails.application.routes.draw do
   patch '/profile/update', to: 'users#update_profile'
   patch '/profile/update_password', to: 'users#update_password'
 
+  get '/profile/new_address', to: 'addresses#new'
+  post '/addresses', to: 'addresses#create'
+  get '/profile/:address_id/edit', to: 'addresses#edit'
+  patch '/profile/:address_id/update', to: 'addresses#update'
+
   get '/profile/orders', to: 'user_orders#index'
   get '/profile/orders/:id', to: 'user_orders#show', as: 'profile_order'
   patch '/profile/orders/:id', to: 'user_orders#update'
