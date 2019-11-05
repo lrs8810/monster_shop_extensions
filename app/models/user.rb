@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   has_many :orders
   has_many :addresses
+  accepts_nested_attributes_for :addresses
   belongs_to :merchant, optional: true
 
   enum role: %w[default merchant_employee merchant_admin site_admin]

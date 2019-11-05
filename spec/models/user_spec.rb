@@ -14,6 +14,7 @@ describe User, type: :model do
   describe 'relationships' do
     it { should have_many :orders }
     it { should have_many :addresses }
+    it { should accept_nested_attributes_for :addresses }
     it { should belong_to(:merchant).optional }
   end
 
