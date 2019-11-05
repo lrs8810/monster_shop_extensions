@@ -1,0 +1,7 @@
+<%= form_for @address, url: address_update_path(@address) do |f| %>
+  <p>Street Address: <%= f.text_field :address, id: 'address'%></p>
+  <p>City: <%= f.text_field :city, id: 'city' %></p>
+  <p>State: <%= f.text_field :state, id: 'state' %></p>
+  <p>Zip: <%= f.text_field :zip, id: 'zip' %></p>
+  <p><%= f.submit 'Update Address' %></p>
+<%end %>
