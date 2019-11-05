@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'As a registered user' do
-  describe 'from the profile page' do
+  describe 'from my profile page' do
     it 'I can create a new address' do
       user = User.create(
         name: 'Bob',
