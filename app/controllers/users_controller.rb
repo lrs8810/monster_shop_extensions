@@ -3,6 +3,7 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
+    1.times { @user.addresses.build }
   end
 
   def create
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, addresses_attributes: [:address, :city, :state, :zip])
   end
 
   def update_profile_params
