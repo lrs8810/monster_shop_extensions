@@ -15,13 +15,25 @@ class AddressesController < ApplicationController
   end
 
   def edit
+    @address = Address.find(params[:address_id])
   end
 
   def update
+    @address = Address.find(params[:address_id])
+    if @address.update(address_params)
+      flash[:success] = 'Your address has been updated!'
+      redirect_to profile_path
+    else
+      flash.now[:error] = @address.errors.full_messages.uniq.to_sentence
+      render :edit
+    end
   end
 
   def destroy
-  end 
+    address = Address.find(params[:address_id])
+    address.destroy
+    redirect_to profile_path
+  end
 
   private
     def address_params
