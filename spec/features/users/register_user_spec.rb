@@ -33,17 +33,18 @@ describe 'User Registration' do
     click_button 'Create User'
 
     expect(page).to have_content('Name can\'t be blank')
-    expect(page).to have_content('Address can\'t be blank')
-    expect(page).to have_content('City can\'t be blank')
-    expect(page).to have_content('State can\'t be blank')
-    expect(page).to have_content('Zip can\'t be blank')
+    expect(page).to have_content('Addresses address can\'t be blank')
+    expect(page).to have_content('Addresses city can\'t be blank')
+    expect(page).to have_content('Addresses state can\'t be blank')
+    expect(page).to have_content('Addresses zip can\'t be blank')
     expect(page).to have_content('Email can\'t be blank')
     expect(page).to have_content('Password can\'t be blank')
     expect(page).to have_content('Password digest can\'t be blank')
   end
 
   it 'as a new user I must register with a unique email address' do
-    User.create!(name: 'Bob', address: '123 Main', city: 'Denver', state: 'CO', zip: 80_233, email: 'bob@email.com', password: 'secure')
+    user = User.create!(name: 'Bob', email: 'bob@email.com', password: 'secure')
+    user.addresses.create(address: '123 Main', city: 'Denver', state: 'CO', zip: 80_233)
 
     visit register_path
 
