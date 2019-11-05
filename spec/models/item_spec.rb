@@ -53,10 +53,6 @@ describe Item, type: :model do
       expect(@chain.no_orders?).to eq(true)
       user = User.create(
         name: 'Bob',
-        address: '123 Main',
-        city: 'Denver',
-        state: 'CO',
-        zip: 80_233,
         email: 'bob@email.com',
         password: 'secure'
       )
