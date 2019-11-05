@@ -14,4 +14,17 @@ describe Address, type: :model do
   describe 'relationships' do
     it { should belong_to :user }
   end
+
+  describe 'nicknames' do
+    it 'home address' do
+      user = User.create(
+        name: 'Bob',
+        email: 'bob@email.com',
+        password: 'secure'
+      )
+      home_address = user.addresses.create(address: '123 Main Street', state: 'Denver', city: 'CO', zip: 80_2018)
+
+      expect(home_address.nickname).to eq('Home')
+    end
+  end
 end
