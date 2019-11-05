@@ -10,7 +10,7 @@ RSpec.describe 'As a registered user' do
         email: 'bob@email.com',
         password: 'secure'
       )
-      user.addresses.create(address: '123 Main', city: 'Denver', state: 'CO', zip: 80_233)
+      address = user.addresses.create(address: '123 Main', city: 'Denver', state: 'CO', zip: 80_233)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -23,7 +23,7 @@ RSpec.describe 'As a registered user' do
         expect(page).to have_content('Email: bob@email.com')
       end
 
-      within '#addresses' do
+      within "#address-#{address.id}" do
         expect(page).to have_content('123 Main')
         expect(page).to have_content('Denver, CO 80233')
       end
