@@ -9,5 +9,5 @@ class Address < ApplicationRecord
 
   belongs_to :user
 
-  enum role: %w[home work billing shipping]
+  enum nickname: %w[Home Work Billing Shipping]
 end
