@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20191105052050) do
     t.string "city"
     t.string "state"
     t.string "zip"
+    t.integer "nickname", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"

@@ -5,6 +5,7 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :state
       t.string :zip
+      t.integer :nickname, default: 0
 
       t.timestamps
     end
