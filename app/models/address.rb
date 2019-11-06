@@ -8,6 +8,11 @@ class Address < ApplicationRecord
   validates_numericality_of :zip
 
   belongs_to :user
+  has_many :orders
 
   enum nickname: %w[Home Work Billing Shipping]
+
+  def shipped_orders?
+    orders.where(status: 2).count > 0 
+  end
 end
