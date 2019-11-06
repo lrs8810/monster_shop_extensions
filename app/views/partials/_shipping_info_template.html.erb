@@ -1,0 +1,12 @@
+<center>
+  <h2>Shipping Info:</h2>
+  <%= form_tag path, method: method do %>
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
+
+    <%= label_tag :address %>
+    <%= select_tag(:address_id, options_for_select(@addresses)) %>
+
+    <%= submit_tag button %>
+  <% end %>
+</center>

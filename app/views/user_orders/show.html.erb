@@ -1,7 +1,7 @@
 <article align= "center" id= 'change-links'>
   <% if @order.status == 'Pending' %>
     <p><%= link_to 'Cancel Order', profile_order_path(@order), method: :patch %>
-    <p><%= link_to 'Edit Shipping Info' %></p>
+    <p><%= link_to 'Edit Shipping Info', order_edit_shipping_path(@order), method: :get %></p>
   <% end %>
 
   <% if @order.status == 'Packaged' %>
