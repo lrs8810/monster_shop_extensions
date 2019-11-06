@@ -172,7 +172,6 @@ RSpec.describe 'As a registered user' do
 
       expect(current_path).to eq("/profile/orders/#{order_1.id}/edit_shipping")
 
-      save_and_open_page
       fill_in :name, with: 'Frank'
       select 'Work', from: :address_id
 

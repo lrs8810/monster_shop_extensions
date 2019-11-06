@@ -106,8 +106,8 @@ describe Merchant, type: :model do
       total_quantity = @meg.specific_orders.map(&:order_total_quantity)
       subtotal = @meg.specific_orders.map(&:order_total_cost)
 
-      expect(total_quantity).to eq([10, 9])
-      expect(subtotal).to eq([400.0, 360.0])
+      expect(total_quantity.sort).to eq([9, 10])
+      expect(subtotal.sort).to eq([360.0, 400.0])
     end
 
     it 'five_most_popular' do

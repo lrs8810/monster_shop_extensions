@@ -2,16 +2,17 @@
   <%=
     render partial: 'partials/user_info', locals: {
       name: @user.name,
-      address: @user.address,
-      city: @user.city,
-      state: @user.state,
-      zip: @user.zip,
       email: @user.email
     }
   %>
   <p><%= link_to 'Edit Profile', "/admin/users/#{@user.id}/edit" %></p>
 </section>
 <br>
+
+<section>
+  <h3>User <%= @user.id %>'s Addresses:</h3>
+  <%= render partial: 'partials/user_address_info', locals: {current_user: @user} %>
+</section>
 
 <section id='user-order-links'>
   <h3> <%= @user.name %>'s Orders</h3>
