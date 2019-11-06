@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  def new; end
+  def new
+    @addresses = Address.where(user_id: current_user.id).pluck(:nickname, :id)
+  end
 
   def show
     @order = Order.find(params[:id])
@@ -21,7 +23,8 @@ class OrdersController < ApplicationController
       session.delete(:cart)
       redirect_to "/orders/#{order.id}"
     else
-      flash[:notice] = 'Please complete address form to create an order.'
+      flash.now[:error] = 'Please complete address form to create an order.'
+      @addresses = Address.where(user_id: current_user.id).pluck(:nickname, :id)
       render :new
     end
   end
@@ -29,6 +32,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:name, :address, :city, :state, :zip)
+    params.permit(:name, :address_id)
   end
 end
