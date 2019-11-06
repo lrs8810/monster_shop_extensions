@@ -38,6 +38,6 @@ class Admin::UsersController < Admin::BaseController
 
   private
     def user_profile_params
-      params.permit(:name, :address, :city, :state, :zip, :email)
+      params.require(:user).permit(:name, :email)
     end
 end
