@@ -145,5 +145,52 @@ RSpec.describe 'As a registered user' do
 
       expect(page).to_not have_link('Cancel Order')
     end
+
+    it 'displays a link to edit the shipping info if the order is pending' do
+      meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203)
+      brian = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80_210)
+
+      tire = meg.items.create(name: 'Gatorskins', description: "They'll never pop!", price: 100, image: 'https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588', inventory: 12)
+      pull_toy = brian.items.create(name: 'Pull Toy', description: 'Great pull toy!', price: 10, image: 'http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg', inventory: 32)
+
+      user = User.create(
+        name: 'Bob',
+        email: 'bob@email.com',
+        password: 'secure'
+      )
+
+      home_address = user.addresses.create(address: '123 Main', city: 'Denver', state: 'CO', zip: 80_233)
+      work_address = user.addresses.create(address: '78 South St', city: 'Boulder', state: 'CO', zip: 80_211, nickname: 1)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+      order_1 = user.orders.create!(name: 'Meg', address_id: home_address.id, status: 0)
+
+      visit profile_order_path(order_1)
+
+      click_on 'Edit Shipping Info'
+
+      expect(current_path).to eq("/profile/orders/#{order_1.id}/edit_shipping")
+
+      save_and_open_page
+      fill_in :name, with: 'Frank'
+      select 'Work', from: :address_id
+
+      click_on 'Update Shipping Info'
+
+      expect(current_path).to eq(profile_order_path(order_1))
+
+      order_1.reload
+
+      within '.shipping-address' do
+        expect(page).to have_content('Frank')
+        expect(page).to have_content('78 South St')
+        expect(page).to have_content('Boulder')
+        expect(page).to have_content('CO')
+        expect(page).to have_content('80211')
+      end
+
+      expect(order_1.address.nickname).to eq('Work')
+    end
   end
 end
