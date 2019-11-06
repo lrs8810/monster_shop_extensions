@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   patch '/profile/:address_id/update', to: 'addresses#update', as: 'address_update'
   delete 'profile/:address_id', to: 'addresses#destroy', as: 'address_destory'
 
+  get '/profile/orders/:id/edit_shipping', to: 'orders#edit', as: 'order_edit_shipping'
+  patch '/profile/orders/:id/update_shipping', to: 'orders#update', as: 'order_update_shipping'
   get '/profile/orders', to: 'user_orders#index'
   get '/profile/orders/:id', to: 'user_orders#show', as: 'profile_order'
   patch '/profile/orders/:id', to: 'user_orders#update'

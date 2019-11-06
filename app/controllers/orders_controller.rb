@@ -29,6 +29,22 @@ class OrdersController < ApplicationController
     end
   end
 
+  def edit
+    @addresses = Address.where(user_id: current_user.id).pluck(:nickname, :id)
+    @order = Order.find(params[:id])
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    if @order.update(order_params)
+      redirect_to profile_order_path(@order)
+    else
+      flash.now[:error] = 'Please complete address form to update your shipping info.'
+      @addresses = Address.where(user_id: current_user.id).pluck(:nickname, :id)
+      render :edit
+    end 
+  end
+
   private
 
   def order_params
