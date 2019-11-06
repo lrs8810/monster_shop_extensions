@@ -8,7 +8,8 @@ RSpec.describe 'As a registered user' do
         email: 'bob@email.com',
         password: 'secure'
       )
-      @address = @user.addresses.create(address: '123', city: 'SA', state: 'TX', zip: 80_201)
+      @address = @user.addresses.create(address: '123 Main St', city: 'San Antonio', state: 'TX', zip: 78240)
+      @address_2 = @user.addresses.create(address: '78 South St', city: 'Denver', state: 'TX', zip: 80218, nickname: 2)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
@@ -57,6 +58,21 @@ RSpec.describe 'As a registered user' do
       click_button 'Update Address'
 
       expect(page).to have_content('City can\'t be blank')
+    end
+
+    it 'I cannot edit an address that has a shipped order' do
+      order_1 = @user.orders.create(name: 'User 1', address_id: @address.id, status: 2)
+      order_2 = @user.orders.create(name: 'User 1', address_id: @address_2.id, status: 1)
+
+      visit profile_path
+
+      within "#address-#{@address.id}" do
+        expect(page).to_not have_link('Edit Address')
+      end
+
+      within "#address-#{@address_2.id}" do
+        expect(page).to have_link('Edit Address')
+      end
     end
   end
 end

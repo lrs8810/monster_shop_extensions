@@ -31,10 +31,8 @@ RSpec.describe 'As a registered user' do
       order_1 = @user.orders.create(name: 'User 1', address_id: @address_1.id, status: 2)
       order_2 = @user.orders.create(name: 'User 1', address_id: @address_2.id, status: 1)
 
-
       visit profile_path
 
-      save_and_open_page
       within "#address-#{@address_1.id}" do
         expect(page).to_not have_link('Delete Address')
       end

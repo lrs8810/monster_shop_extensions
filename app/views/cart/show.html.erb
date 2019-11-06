@@ -47,7 +47,9 @@
   <p>Total: <%= number_to_currency(cart.total) %></p>
   <p><%= link_to "Empty Cart", "/cart", method: :delete %></p>
   <p id = 'checkout'>
-    <% if current_user %>
+    <% if current_user && current_user.addresses.empty? %>
+      Please <%= link_to 'add address', profile_new_address_path, method: :get %> to checkout
+    <% elsif current_user %>
       <%= link_to "Checkout", "/orders/new", method: :get %>
     <% else %>
       Please <%= link_to 'Register', register_path %> or <%= link_to 'Log In', login_path %> to Checkout
