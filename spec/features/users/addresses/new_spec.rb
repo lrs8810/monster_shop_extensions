@@ -30,10 +30,10 @@ RSpec.describe 'As a registered user' do
       expect(current_path).to eq(profile_path)
 
       expect(page).to have_content('Your address has been added!')
+      expect(user.addresses.count).to eq(2)
 
       within '#addresses' do
         expect(page).to have_content("123\nSA, TX 80201")
-        # expect(page).to have_content("78 South St\nSan Antonio, TX 78240")
       end
     end
   end
