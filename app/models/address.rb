@@ -13,6 +13,10 @@ class Address < ApplicationRecord
   enum nickname: %w[Home Work Billing Shipping]
 
   def shipped_orders?
-    orders.where(status: 2).count > 0 
+    orders.where(status: 2).count > 0
+  end
+
+  def all_orders_cancelled?
+    orders.where(status: 3).count == orders.count
   end
 end

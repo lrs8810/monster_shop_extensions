@@ -48,5 +48,21 @@ describe Address, type: :model do
       expect(@address_2.orders.count).to eq(1)
       expect(@address_2.shipped_orders?).to eq(false)
     end
+
+    it 'all_orders_cancelled?' do
+      @user = User.create(
+        name: 'Bob',
+        email: 'bob@email.com',
+        password: 'secure'
+      )
+      @address_1 = @user.addresses.create(address: '123', city: 'SA', state: 'TX', zip: 80_201)
+      @address_2 = @user.addresses.create(address: '124 Main', city: 'SA', state: 'TX', zip: 78240, nickname: 2)
+      order_1 = @user.orders.create(name: 'User 1', address_id: @address_1.id, status: 3)
+      order_2 = @user.orders.create(name: 'User 1', address_id: @address_1.id, status: 2)
+      order_3 = @user.orders.create(name: 'User 1', address_id: @address_2.id, status: 3)
+
+      expect(@address_1.all_orders_cancelled?).to eq(false)
+      expect(@address_2.all_orders_cancelled?).to eq(true)
+    end
   end
 end
