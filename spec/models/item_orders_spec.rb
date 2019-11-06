@@ -24,7 +24,8 @@ describe ItemOrder, type: :model do
         email: 'bob@email.com',
         password: 'secure'
       )
-      @order_1 = @user.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17_033)
+      @home_address = @user.addresses.create(address: '123 Stang Ave', city: 'Hershey', state: 'PA',zip: 17_033)
+      @order_1 = @user.orders.create!(name: 'Meg', address_id: @home_address.id)
       @item_order_1 = @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
     end
 

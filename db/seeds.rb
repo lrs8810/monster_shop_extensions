@@ -6,6 +6,7 @@ Review.destroy_all
 User.destroy_all
 Order.destroy_all
 ItemOrder.destroy_all
+Address.destroy_all
 
 # merchants
 bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80_203)
@@ -62,18 +63,24 @@ dog_admin = dog_shop.users.create(name: 'Dog Admin', email: 'dog_admin@user.com'
 # site admin
 site_admin = User.create(name: 'Site Admin', email: 'site_admin@user.com', password: 'secure', role: 3)
 
+# addresses
+address_1 = user_1.addresses.create(address: '123 Main', city: 'Denver', state: 'CO', zip: 80_233, nickname: 0)
+address_2 = user_2.addresses.create(address: '987 First', city: 'Dallas', state: 'TX', zip: 75_001, nickname: 0)
+address_3 = user_1.addresses.create(address: '123 Main', city: 'Denver', state: 'CO', zip: 80_233, nickname: 1)
+address_4 = user_2.addresses.create(address: '987 First', city: 'Dallas', state: 'TX', zip: 75_001, nickname: 1)
+
 # orders
-order_1 = user_1.orders.create(name: 'User 1', address: '123 Main', city: 'Denver', state: 'CO', zip: 80_233)
+order_1 = user_1.orders.create(name: 'User 1', address_id: address_1.id)
 item_order_1a = order_1.item_orders.create(order_id: order_1.id, item_id: tire.id, quantity: 1, price: 100, merchant_id: bike_shop.id)
 item_order_1b = order_1.item_orders.create(order_id: order_1.id, item_id: helmet.id, quantity: 1, price: 15, merchant_id: bike_shop.id)
 item_order_1c = order_1.item_orders.create(order_id: order_1.id, item_id: pull_toy.id, quantity: 2, price: 10, merchant_id: dog_shop.id)
 
-order_2 = user_2.orders.create(name: 'User 2', address: '987 First', city: 'Dallas', state: 'TX', zip: 75_001)
+order_2 = user_2.orders.create(name: 'User 2', address_id: address_2.id)
 item_order_2a = order_2.item_orders.create(order_id: order_2.id, item_id: pull_toy.id, quantity: 1, price: 10, merchant_id: dog_shop.id)
 item_order_2b = order_2.item_orders.create(order_id: order_2.id, item_id: tire.id, quantity: 2, price: 100, merchant_id: bike_shop.id)
 
-order_3 = user_1.orders.create(name: 'User 1', address: '123 Main', city: 'Denver', state: 'CO', zip: 80_233)
+order_3 = user_1.orders.create(name: 'User 1', address_id: address_3.id)
 item_order_3a = order_3.item_orders.create(order_id: order_3.id, item_id: helmet.id, quantity: 2, price: 15, merchant_id: bike_shop.id)
 
-order_4 = user_2.orders.create(name: 'User 2', address: '987 First', city: 'Dallas', state: 'TX', zip: 75_001)
+order_4 = user_2.orders.create(name: 'User 2', address_id: address_4.id)
 item_order_4a = order_4.item_orders.create(order_id: order_4.id, item_id: pull_toy.id, quantity: 2, price: 10, merchant_id: dog_shop.id)
