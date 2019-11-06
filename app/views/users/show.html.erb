@@ -13,14 +13,16 @@
 <h4>My Addresses: </h4>
   <section class="grid-container" id= "addresses">
     <% current_user.addresses.each do |address| %>
-      <section class = "grid-item" id= "address-<%= address.id %>">
-        <p><%= address.nickname %></p>
-        <p> <%= address.address %></p>
-        <p> <%= "#{address.city}, #{address.state} #{address.zip}" %></p>
-        <% if !address.shipped_orders? %>
-          <p><%= link_to 'Edit Address', address_edit_path(address) %> | <%= link_to 'Delete Address', address_destory_path(address), method: :delete %></p>
-        <% end %>
-      </section>
+      <% if address.enabled? %>
+        <section class = "grid-item" id= "address-<%= address.id %>">
+          <p><%= address.nickname %></p>
+          <p> <%= address.address %></p>
+          <p> <%= "#{address.city}, #{address.state} #{address.zip}" %></p>
+          <% if !address.shipped_orders? %>
+            <p><%= link_to 'Edit Address', address_edit_path(address) %> | <%= link_to 'Delete Address', address_disable_path(address), method: :patch %></p>
+          <% end %>
+        </section>
+      <% end %>
     <% end %>
   </section>
 <hr>

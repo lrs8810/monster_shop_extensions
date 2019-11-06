@@ -29,9 +29,13 @@ class AddressesController < ApplicationController
     end
   end
 
-  def destroy
+  def disable
     address = Address.find(params[:address_id])
-    address.destroy
+    if address.orders.empty? || address.all_orders_cancelled?
+      address.toggle!(:enabled?)
+    else
+      flash[:error] = "This address is currently in use for one or more of your orders. Please edit the shipping address on any Pending or Packaged orders and then try again."
+    end
     redirect_to profile_path
   end
 
