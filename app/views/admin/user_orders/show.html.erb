@@ -1,3 +1,13 @@
+<article align= "center" id= 'change-links'>
+  <% if @order.status == 'Pending' %>
+    <p><%= link_to 'Cancel Order', admin_user_order_update_path(@order.user.id, @order.id), method: :patch %>
+  <% end %>
+</article>
+
+<article>
+  <%= render partial: 'partials/shipping_info' %>
+</article><br>
+
 <h1>Order ID: <%= @order.id %></h1>
 <article id='order-info'>
   <%= render partial: 'partials/order_info',
@@ -11,7 +21,4 @@
       grand_total: @order.grand_total
     }
   %>
-<% if @order.status == 'Pending' %>
-  <p><%= link_to 'Cancel Order', admin_user_order_update_path(@order.user.id, @order.id), method: :patch %>
-<% end %>
 </article>
