@@ -10,7 +10,7 @@ class Merchant < ApplicationRecord
                         :city,
                         :state,
                         :zip
-  
+
   validates_inclusion_of :enabled?, in: [true, false]
 
   def no_orders?
@@ -26,9 +26,7 @@ class Merchant < ApplicationRecord
   end
 
   def distinct_cities
-    item_orders.distinct.joins(order: :user)
-      .where('"users"."enabled?" = \'t\'')
-      .pluck('orders.city')
+    item_orders.distinct.joins(order: :address).pluck('addresses.city')
   end
 
   def specific_orders
