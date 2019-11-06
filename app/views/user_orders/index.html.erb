@@ -1,7 +1,6 @@
 <h1>My Orders</h1>
 <% current_user.orders.each do |order| %>
   <article id='order-<%= order.id %>'>
-  <p>ID: <%= link_to "#{order.id}", profile_order_path(order) %></p>
     <%= render partial: 'partials/order_info',
       locals: {
         id: order.id,
@@ -14,5 +13,4 @@
       }
     %>
   </article>
-  <hr>
 <% end %>

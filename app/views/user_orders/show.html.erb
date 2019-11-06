@@ -1,5 +1,20 @@
-<h1>Order ID: <%= @order.id %></h1>
+<article align= "center" id= 'change-links'>
+  <% if @order.status == 'Pending' %>
+    <p><%= link_to 'Cancel Order', profile_order_path(@order), method: :patch %>
+    <p><%= link_to 'Edit Shipping Info' %></p>
+  <% end %>
+
+  <% if @order.status == 'Packaged' %>
+    <p><%= link_to 'Cancel Order', profile_order_path(@order), method: :patch %>
+  <% end %>
+</article>
+
+<article>
+  <%= render partial: 'partials/shipping_info' %>
+</article><br>
+
 <article id='order-info'>
+  <h1 align= 'center'>Order <%= @order.id %></h1>
   <%= render partial: 'partials/order_info',
     locals: {
       id: @order.id,
@@ -11,10 +26,4 @@
       grand_total: @order.grand_total
     }
   %>
-<% if @order.status == 'Pending' %>
-  <p><%= link_to 'Cancel Order', profile_order_path(@order), method: :patch %>
-<% end %>
-<% if @order.status == 'Packaged' %>
-  <p><%= link_to 'Cancel Order', profile_order_path(@order), method: :patch %>
-<% end %>
 </article>
