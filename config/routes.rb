@@ -12,28 +12,24 @@ Rails.application.routes.draw do
   get '/items/:item_id/reviews/new', to: 'reviews#new'
   post '/items/:item_id/reviews', to: 'reviews#create'
 
-  get '/merchants/:merchant_id/items', to: 'items#index'
-  get '/merchants/:merchant_id/items/new', to: 'items#new'
+  get '/merchants/:merchant_id/items', to: 'items#index', as: 'merchant_items'
+  get '/merchants/:merchant_id/items/new', to: 'items#new', as: 'new_merchant_item'
   post '/merchants/:merchant_id/items', to: 'items#create'
 
-  # get '/merchants', to: 'merchants#index'
-  # post '/merchants', to: 'merchants#create'
-  # get '/merchants/new', to: 'merchants#new', as: 'new_merchant'
-  # get '/merchants/:id/edit', to: 'merchants#edit'
-  # get '/merchants/:id', to: 'merchants#show'
-  # patch '/merchants/:id', to: 'merchants#update'
-  # delete '/merchants/:id', to: 'merchants#destroy'
-
-  resources :merchants do
-    resources :items, only: %i[new create index]
-  end
+  get '/merchants', to: 'merchants#index'
+  post '/merchants', to: 'merchants#create'
+  get '/merchants/new', to: 'merchants#new', as: 'new_merchant'
+  get '/merchants/:id/edit', to: 'merchants#edit'
+  get '/merchants/:id', to: 'merchants#show', as: 'merchant'
+  patch '/merchants/:id', to: 'merchants#update'
+  delete '/merchants/:id', to: 'merchants#destroy'
 
   get '/reviews/:id/edit', to: 'reviews#edit'
   patch '/reviews/:id', to: 'reviews#update'
   delete '/reviews/:id', to: 'reviews#destroy'
 
-  get '/orders/new', to: 'orders#new', as: 'order'
-  get '/orders/:id', to: 'orders#show'
+  get '/orders/new', to: 'orders#new'
+  get '/orders/:id', to: 'orders#show', as: 'order'
   post '/orders', to: 'orders#create'
 
   post '/cart/:item_id', to: 'cart#add_item'
