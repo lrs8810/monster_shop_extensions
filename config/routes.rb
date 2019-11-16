@@ -3,17 +3,34 @@
 Rails.application.routes.draw do
   get '/', to: 'items#index', as: 'welcome'
 
-  resources :items, except: %i[new create] do
-    resources :reviews, only: %i[new create]
-  end
+  get '/items', to: 'items#index'
+  get '/items/:id', to: 'items#show', as: 'item'
+  get '/items/:id/edit', to: 'items#edit'
+  patch '/items/:id', to: 'items#update'
+  delete '/items/:id', to: 'items#destroy'
 
-  resources :merchants do
-    resources :items, only: %i[new create index]
-  end
+  get '/items/:item_id/reviews/new', to: 'reviews#new'
+  post '/items/:item_id/reviews', to: 'reviews#create'
 
-  resources :reviews, only: %i[edit update destroy]
+  get '/merchants/:merchant_id/items', to: 'items#index', as: 'merchant_items'
+  get '/merchants/:merchant_id/items/new', to: 'items#new', as: 'new_merchant_item'
+  post '/merchants/:merchant_id/items', to: 'items#create'
 
-  resources :orders, only: %i[new create show]
+  get '/merchants', to: 'merchants#index'
+  post '/merchants', to: 'merchants#create'
+  get '/merchants/new', to: 'merchants#new', as: 'new_merchant'
+  get '/merchants/:id/edit', to: 'merchants#edit'
+  get '/merchants/:id', to: 'merchants#show', as: 'merchant'
+  patch '/merchants/:id', to: 'merchants#update'
+  delete '/merchants/:id', to: 'merchants#destroy'
+
+  get '/reviews/:id/edit', to: 'reviews#edit'
+  patch '/reviews/:id', to: 'reviews#update'
+  delete '/reviews/:id', to: 'reviews#destroy'
+
+  get '/orders/new', to: 'orders#new'
+  get '/orders/:id', to: 'orders#show', as: 'order'
+  post '/orders', to: 'orders#create'
 
   post '/cart/:item_id', to: 'cart#add_item'
   get '/cart', to: 'cart#show'
